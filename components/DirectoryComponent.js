@@ -9,6 +9,7 @@ function Directory(props) {
             <ListItem
                 title={item.name}
                 subtitle={item.description}
+                onPress={() => props.onPress(item.id)}
                 leftAvatar={{ source: require('./images/react-lake.jpg') }}
             />
         );
@@ -20,6 +21,8 @@ function Directory(props) {
             renderItem={renderDirectoryItem}
             keyExtractor={item => item.id.toString()}
         />
+
+
     );
 }
 
