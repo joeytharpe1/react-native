@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-    Text, View, ScrollView, StyleSheet,
-    Picker, Switch, Button, Modal
-} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+    Text,
+    View,
+    ScrollView,
+    StyleSheet,
+    Picker,
+    Switch,
+    Button,
+    Modal,
+} from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 class Reservation extends Component {
-
     constructor(props) {
         super(props);
 
@@ -15,14 +20,12 @@ class Reservation extends Component {
             hikeIn: false,
             date: new Date(),
             showCalendar: false,
-            showModal: false
         };
     }
 
     static navigationOptions = {
-        title: 'Reserve Campsite'
-    }
-
+        title: "Reserve Campsite",
+    };
     toggleModal() {
         this.setState({ showModal: !this.state.showModal });
     }
@@ -38,7 +41,7 @@ class Reservation extends Component {
             hikeIn: false,
             date: new Date(),
             showCalendar: false,
-            showModal: false
+            showModal: false,
         });
     }
 
@@ -50,14 +53,14 @@ class Reservation extends Component {
                     <Picker
                         style={styles.formItem}
                         selectedValue={this.state.campers}
-                        onValueChange={itemValue => this.setState({ campers: itemValue })}
+                        onValueChange={(itemValue) => this.setState({ campers: itemValue })}
                     >
-                        <Picker.Item label='1' value='1' />
-                        <Picker.Item label='2' value='2' />
-                        <Picker.Item label='3' value='3' />
-                        <Picker.Item label='4' value='4' />
-                        <Picker.Item label='5' value='5' />
-                        <Picker.Item label='6' value='6' />
+                        <Picker.Item label="1" value="1" />
+                        <Picker.Item label="2" value="2" />
+                        <Picker.Item label="3" value="3" />
+                        <Picker.Item label="4" value="4" />
+                        <Picker.Item label="5" value="5" />
+                        <Picker.Item label="6" value="6" />
                     </Picker>
                 </View>
                 <View style={styles.formRow}>
@@ -65,8 +68,8 @@ class Reservation extends Component {
                     <Switch
                         style={styles.formItem}
                         value={this.state.hikeIn}
-                        trackColor={{ true: '#5637DD', false: null }}
-                        onValueChange={value => this.setState({ hikeIn: value })}
+                        trackColor={{ true: "#5637DD", false: null }}
+                        onValueChange={(value) => this.setState({ hikeIn: value })}
                     />
                 </View>
                 <View style={styles.formRow}>
@@ -75,18 +78,19 @@ class Reservation extends Component {
                         onPress={() =>
                             this.setState({ showCalendar: !this.state.showCalendar })
                         }
-                        title={this.state.date.toLocaleDateString('en-US')}
-                        color='#5637DD'
-                        accessibilityLabel='Tap me to select a reservation date'
+                        title={this.state.date.toLocaleDateString("en-US")}
+                        color="#5637DD"
+                        accessibilityLabel="Tap me to select a reservation date"
                     />
                 </View>
                 {this.state.showCalendar && (
                     <DateTimePicker
                         value={this.state.date}
-                        mode={'date'}
-                        display='default'
+                        mode={"date"}
+                        display="default"
                         onChange={(event, selectedDate) => {
-                            selectedDate && this.setState({ date: selectedDate, showCalendar: false });
+                            selectedDate &&
+                                this.setState({ date: selectedDate, showCalendar: false });
                         }}
                         style={styles.formItem}
                     />
@@ -94,13 +98,13 @@ class Reservation extends Component {
                 <View style={styles.formRow}>
                     <Button
                         onPress={() => this.handleReservation()}
-                        title='Search'
-                        color='#5637DD'
-                        accessibilityLabel='Tap me to search for available campsites to reserve'
+                        title="Search"
+                        color="#5637DD"
+                        accessibilityLabel="Tap me to search for available campsites to reserve"
                     />
                 </View>
                 <Modal
-                    animationType={'slide'}
+                    animationType={"slide"}
                     transparent={false}
                     visible={this.state.showModal}
                     onRequestClose={() => this.toggleModal()}
@@ -111,18 +115,18 @@ class Reservation extends Component {
                             Number of Campers: {this.state.campers}
                         </Text>
                         <Text style={styles.modalText}>
-                            Hike-In?: {this.state.hikeIn ? 'Yes' : 'No'}
+                            Hike-In?: {this.state.hikeIn ? "Yes" : "No"}
                         </Text>
                         <Text style={styles.modalText}>
-                            Date: {this.state.date.toLocaleDateString('en-US')}
+                            Date: {this.state.date.toLocaleDateString("en-US")}
                         </Text>
                         <Button
                             onPress={() => {
                                 this.toggleModal();
                                 this.resetForm();
                             }}
-                            color='#5637DD'
-                            title='Close'
+                            color="#5637DD"
+                            title="Close"
                         />
                     </View>
                 </Modal>
@@ -133,35 +137,35 @@ class Reservation extends Component {
 
 const styles = StyleSheet.create({
     formRow: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         flex: 1,
-        flexDirection: 'row',
-        margin: 20
+        flexDirection: "row",
+        margin: 20,
     },
     formLabel: {
         fontSize: 18,
-        flex: 2
+        flex: 2,
     },
     formItem: {
-        flex: 1
+        flex: 1,
     },
-    modal: { 
-        justifyContent: 'center',
-        margin: 20
+    modal: {
+        justifyContent: "center",
+        margin: 20,
     },
     modalTitle: {
         fontSize: 24,
-        fontWeight: 'bold',
-        backgroundColor: '#5637DD',
-        textAlign: 'center',
-        color: '#fff',
-        marginBottom: 20
+        fontWeight: "bold",
+        backgroundColor: "#5637DD",
+        textAlign: "center",
+        color: "#fff",
+        marginBottom: 20,
     },
     modalText: {
         fontSize: 18,
-        margin: 10
-    }
+        margin: 10,
+    },
 });
 
 export default Reservation;
